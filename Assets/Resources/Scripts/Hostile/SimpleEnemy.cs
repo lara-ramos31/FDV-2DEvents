@@ -10,6 +10,7 @@ public class SimpleEnemy : MonoBehaviour
     public float minDistance = 2.0f;
     public bool shouldMove = false;
 
+    public PlayerGameplay player;
     public Transform objective;
     private Vector2 movement;
     private SpriteRenderer renderer;
@@ -21,6 +22,9 @@ public class SimpleEnemy : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         if (objective == null) {
             Debug.LogError("Enemy: no objective set!");
+        }
+        if (player != null) {
+            player.onKeyCollected += EnableMoving;
         }
     }
 

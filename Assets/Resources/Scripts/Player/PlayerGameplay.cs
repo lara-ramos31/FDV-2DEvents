@@ -11,6 +11,8 @@ public class PlayerGameplay : MonoBehaviour
     public delegate void FloatChanged(float val);
     public FloatChanged onHealthChange; // val is new health
     public FloatChanged onScoreChange; // val is new score
+    public delegate void CollectedItem();
+    public CollectedItem onKeyCollected;
 
     void Start()
     {
@@ -47,7 +49,11 @@ public class PlayerGameplay : MonoBehaviour
         switch(other.gameObject.layer)
         {
             case 10: // collectable
-                AddScore(50);
+                if (other.gameObject.CompareTag("Collectable.Key")) {
+                    onKeyCollected?.Invoke();
+                } else {
+                    AddScore(50);
+                }
                 Destroy(other.gameObject);
                 break;
         }

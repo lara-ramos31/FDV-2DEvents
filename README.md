@@ -168,3 +168,71 @@ This change was very simple to implement. I added a new instance of the `Enemy` 
 > Add a collectable object that, when colliding with the player, triggers an event that makes another two objects in the scene perform the following tasks simultaneously:
 > - Object A: starts to move smoothly towards the current position of the player.
 > - Object B: moves immediately to a fixed point in the scene.
+
+![The scene with the proposed changes](Media/task3.gif)
+
+For this change, I created a new `Key` prefab with a `Collectable.Key` tag, and a new `onKeyCollected` delegate inside [`PlayerGameplay`](Assets/Resources/Scripts/Player/PlayerGameplay.cs). Then, I modified the Collectable checking logic to account for the new item:
+
+```c#
+void OnTriggerEnter2D(Collider2D other)
+{
+    switch(other.gameObject.layer)
+    {
+        case 10: // collectable
+            if (other.gameObject.CompareTag("Collectable.Key")) {
+                onKeyCollected?.Invoke();
+            } else {
+                AddScore(50);
+            }
+            Destroy(other.gameObject);
+            break;
+    }
+}
+```
+
+To reuse existing code, I added an optional `PlayerGameplay` reference to [`SimpleEnemy`](Assets/Resources/Scripts/Hostile/SimpleEnemy.cs) so that it may act as Object A:
+
+```c#
+void Start()
+{
+    rb = GetComponent<Rigidbody2D>();
+    renderer = GetComponent<SpriteRenderer>();
+    if (objective == null) {
+        Debug.LogError("Enemy: no objective set!");
+    }
+    if (player != null) {
+        player.onKeyCollected += EnableMoving;
+    }
+}
+```
+
+Finally, for Object B I created a new [`TeleportObject`](Assets/Resources/Scripts/TeleportObject.cs) script, which simply moves to its objective when its method is `TeleportToObjective` method is invoked (when `onKeyCollected` is triggered):
+
+```c#
+using UnityEngine;
+
+public class TeleportObject : MonoBehaviour
+{
+    public Transform objective;
+    public PlayerGameplay player;
+
+    void Start()
+    {
+        if (objective == null)
+        {
+            Debug.LogError("TeleportObject: no objective!");
+        }
+        if (player == null)
+        {
+            Debug.LogError("TeleportObject: no player!");
+            return;
+        }
+        player.onKeyCollected += TeleportToObjective;
+    }
+
+    void TeleportToObjective()
+    {
+        transform.position = objective.position;
+    }
+}
+```
