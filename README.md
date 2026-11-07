@@ -157,6 +157,12 @@ Finally, I added a new `ToggleStealth()` function inside the [`PhysicsMovement`]
 
 > Add a character to the scene that, when clicking on a specific UI element, moves progressively in the 2D space towards its "hideout" in the scene.
 
+![The scene with the proposed change](Media/task2.gif)
+
+This change was very simple to implement. I added a new instance of the `Enemy` prefab, which uses the [`SimpleEnemy`](Assets/Resources/Scripts/Hostile/SimpleEnemy.cs) script from the [previous assignment](https://github.com/lara-ramos31/FDV-2DTilemaps). I simply added a new `shouldMove` to guard the movement logic, and a new `EnableMoving()` method to set it to `true` when the new button is clicked. The "Hideout" is just an empty GameObject placed in the scene.
+
+![A screenshot of the inspector showing the new button's configuration](Media/task2_button.png)
+
 ## Task 3
 
 > Add a collectable object that, when colliding with the player, triggers an event that makes another two objects in the scene perform the following tasks simultaneously:

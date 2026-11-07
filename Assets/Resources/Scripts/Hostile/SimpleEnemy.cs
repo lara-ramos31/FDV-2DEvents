@@ -47,4 +47,9 @@ public class SimpleEnemy : MonoBehaviour
     {
         rb.linearVelocity = speed * movement;
     }
+
+    public void EnableMoving()
+    {
+        shouldMove = true;
+    }
 }
