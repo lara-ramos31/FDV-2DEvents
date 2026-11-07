@@ -1,4 +1,4 @@
-# FDV-2DTilemaps
+# FDV-2DEvents
 
 *Fundamentos del Desarrollo de Videojuegos*' assignment: events programming exercises.
 
