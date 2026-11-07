@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Background
+  - Water
+  - UI
+  - Obstacles
+  - Decoration
+  - HarmfulEnv
+  - HarmfulNPC
+  - Collectables
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 3531853163
+    locked: 0
+  - name: Obstacles
+    uniqueID: 1638023307
+    locked: 0
+  - name: Decoration
+    uniqueID: 1299206299
+    locked: 0
+  - name: Harmful
+    uniqueID: 3707552133
+    locked: 0
+  - name: Collectables
+    uniqueID: 3479326123
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  m_RenderingLayers:
+  - Default
+  m_MigratedRenderPipelines: []
